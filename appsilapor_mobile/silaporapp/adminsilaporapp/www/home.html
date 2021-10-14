@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title></title>
+</head>
+<body>
+
+
+    <div class="menu white" id="myMenu">
+        <div class="list no-border">
+            <div class="item blue">
+                <div class="left">
+                    <img class="avatar circle" src="img/logo.png" width="50" height="50">
+                </div>
+                <h1><p id="usernamemenu"></p></h1>
+                <p id="emailmenu"></p>
+            </div>
+            <a onclick="openPage('profildiri',getprofildiri)" class="item">
+                <div class="left">
+                    <i class="icon ion-person"></i>
+                </div>
+                <h1>Profil</h1>
+            </a>
+
+            <a onclick="openPage('tentang',gettentangapp)" class="item">
+                <div class="left">
+                    <i class="icon ion-android-alert"></i>
+                </div>
+                <h1>Tentang Halo Tapin</h1>
+            </a>
+
+            <a onclick="closeApp()" class="item">
+                <div class="left">
+                    <i class="icon ion-ios-close-outline"></i>
+                </div>
+                <h1>Close menu</h1>
+            </a>
+        </div>
+    </div>
+    <div class="header blue">
+        <button class="left icon ion-navicon" onclick="openMenu('myMenu')"></button>
+        <div class="right">
+            <span class="icon-badge text-small red radius padding"><div id="totaladuan"></div></span>
+            <button class="icon ion-chatbox" onclick="bukahalaman()"></button>
+        </div>
+
+    </div>
+
+
+    <div class="content has-header">
+        <div class="row padding indigo align-center">
+            <div class="col-90 padding ">
+                <img id="avatarlogo1" class="avatar circle border-white shadow" src="" width="150" height="150" />
+                <!--      <img id="avatarlogo2" class="avatar circle border-white shadow" src="img/sirine.gif" width="200" height="200" style="display:none" onclick="getlokasidarurat()" />
+            -->
+            </div>
+      
+        </div>
+        <div class="row padding indigo align-center">
+   
+            <div class="col-90 padding">
+                <h1 class="text-big text-light"><p id="namasubunit"></p></h1>
+                <p class="text-blue-200"></p>
+            </div>
+        </div>
+        <div class="row align-center">
+            <div class="col padding light-blue" onclick="pageanggota()">
+                <img class="avatar circle border-white shadow" src="img/tim.png" width="50" height="50" />
+                <p>Anggota</p>
+            </div>
+            <div class="col padding pink-400" onclick="bukahalaman()">
+                <img class="avatar circle border-white shadow" src="img/pesan.png" width="50" height="50" />
+                <p>Aduan masuk</p>
+            </div>
+        </div>
+        <div class="list radius white">
+            <div class="item">
+                <div class="left">
+                    <img class="avatar radius" src="img/peralatan.png">
+                </div>
+                <h2>Data Peralatan</h2>
+                <p class="text-grey-500">Kelengkapan dalam bertugas</p>
+                <div class="right">
+                    <i class="icon ion-ios-arrow-right" onclick="pageperlengkapan()"></i>
+                </div>
+            </div>
+            <div class="item">
+                <div class="left">
+                    <img class="avatar radius" src="img/transport.png">
+                </div>
+                <h2>Data Transportasi</h2>
+                <p class="text-grey-500">Kendaraan roda 2,3 atau 4</p>
+                <div class="right">
+                    <i class="icon ion-ios-arrow-right" onclick="pagetransportasi()"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="mobileui/mobileui.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/variable_publik.js"></script>
+    <script type="text/javascript" src="js/indexhome.js"></script>
+    <script type="text/javascript" src="js/profil.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/data_aduan.js"></script>
+    <script type="text/javascript" src="js/load_alarm.js"></script>
+    <script type="text/javascript" src="js/anggota.js"></script>
+    <script>
+        var usernamemenu = window.localStorage.getItem('username');
+        var emailmenu = window.localStorage.getItem('email');
+        $("#usernamemenu").html(usernamemenu);
+        $("#emailmenu").html(emailmenu);
+
+        function onConfirm(buttonIndex) {
+            if (buttonIndex == 1) { // nomer 1 adalah urutan tombol Ya
+
+                localStorage.clear();
+                cordova.plugins.backgroundMode.disable();
+                window.location.href = "index.html"; // perintah untuk keluar dari aplikasi
+            }
+        }
+
+        function closeApp() {
+            navigator.notification.confirm(
+                'Yakin untuk Keluar Aplikasi ?', // pesan
+                onConfirm, // callback saat tombol ditekan
+                'Konfirmasi', // title
+                ['Ya', 'Tidak']     // buttonLabels
+            );
+        }
+
+        function gettentangapp() {
+            $.get(baseUrl + 'ref/tentang-app')
+                .always(function (datanya) {
+                    $("#tentangapp").html(datanya);
+                })
+        }
+
+
+    </script>
+    <script>
+
+        namaunit = localStorage.getItem('nama_sub_unit');
+        $("#namasubunit").html(namaunit);
+
+        var path_img = localStorage.getItem('lokasi_img');
+        var image = document.getElementById('avatarlogo1');
+        image.src = path_img;
+    //    console.log(path_img);
+
+        var id_group_user = localStorage.getItem('id_group_user');
+        total_kotak_masuk_aduan(id_group_user);
+        $("#totaladuan").html(totaladuan)
+
+        PullToRefresh.init({
+            mainElement: '.content',
+            onRefresh: function () {
+                var id_group_user = localStorage.getItem('id_group_user');
+                total_kotak_masuk_aduan(id_group_user);
+                $("#totaladuan").html(totaladuan)
+            }
+        });
+
+        function bukahalaman() {
+            var id_group_user = localStorage.getItem('id_group_user');
+            openPage('data_aduan', { 'id': id_group_user }, 'getListAduan');
+        }
+
+
+
+    </script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYV4tKT88OZRJQ-z8EvF3xRTNWXY3pCBc&callback=initialize"
+                async defer></script>
+    -->
+</body>
+</html>
+

@@ -1,0 +1,26 @@
+﻿
+<body class="blue">
+    <div class="page">
+        <div class="header indigo">
+            <div class="left">
+                <button class="icon ion-android-arrow-back" onclick="backPage()"></button>
+            </div>
+        </div>
+        <div class="content has-header">
+
+            <div class="list radius white">
+                <div class="item" data="getaduan">
+                    <div class="left">
+                        <img class="avatar radius" src="img/logo.png">
+                    </div>
+                    <h2>${jenis_aduan} , Pelapor : a/n ${nope_pengguna}</h2>
+                    <p class="text-grey-500">Tanggal Jam : ${jam_tgl}</p>
+                    <div class="right" onclick="openPage('list_per_aduan', { nope_pengguna: '${nope_pengguna}',rincian_aduan : '${rincian_aduan}',lokasi_kejadian_lat : '${lokasi_kejadian_lat}',lokasi_kejadian_long : '${lokasi_kejadian_long}',foto : '${foto}'  },list_per_aduaun)">
+                        <i class="icon ion-ios-arrow-right"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+</body>

@@ -1,0 +1,59 @@
+﻿<div class="page">
+
+    <div class="header green">
+        <button class="left icon ion-android-arrow-back" onclick="backPage()"></button>
+        <h1>Form Daftar</h1>
+    </div>
+
+    <div class="content padding has-header">
+       <div class="space"></div>
+       <div class="list">
+           <div class="item small-space green-50 text-grey-700">
+               <p>
+                   PROFIL PENGGUNA
+               </p>
+           </div>
+               <input type="hidden" placeholder="No Induk Anggota" id="no_induk">
+           <div class="item">
+               <label class="text-orange">Nama Lengkap</label>
+               <input type="text" placeholder="Nama Lengkap" id="nama_lengkap">
+           </div>
+           <div class="item">
+               <label class="text-orange">Alamat</label>
+               <textarea rows="4" cols="4" placeholder="Alamat" id="alamat"></textarea>
+           </div>
+           <div class="item">
+               <label class="text-orange">Jenis Kelamin</label>
+               <select id="jkel">
+                   <option>Pilih Jenis Kelamin</option>
+                   <option value="1">Laki - Laki</option>
+                   <option value="2">Perempuan</option>
+               </select>
+           </div>
+           <div class="item">
+               <label class="text-orange">No Telpon (Aktif)</label>
+               <input type="text" id="nope" placeholder="No Telpon">
+           </div>
+           <div class="item">
+               <label class="text-orange">Email (Aktif)</label>
+               <input type="email" id="email" placeholder="E-Mail">
+           </div>
+
+           <div class="item small-space light-green-50 text-grey-700">
+               <p>
+                   AKUN PENGGUNA
+               </p>
+           </div>
+           <div class="item  icon ion-person ">
+                 <input type="text" id="usernamebaru" placeholder="Username">
+           </div>
+           <div class="item  icon ion-key">
+               <input type="text" id="passwordbaru" placeholder="Password (Panjang Min 6 Karakter)">
+           </div>
+
+           <div class="item">
+               <button class="green radius full" onclick="SignIn()">Daftar</button>
+           </div>
+       </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title></title>
+</head>
+<body>
+    <div class="header blue">
+        <h1 class="align-center">Halo Tapin <small>V 0.1</small></h1>
+    </div>
+    <div class="content padding has-header">
+        <div class="footer blue shadow tab">
+            <button class="icon ion-android-list active" onclick="openTab('home')">Login</button>
+            <button class="icon ion-android-person-add" onclick="openPage('signup',getref)">Daftar</button>
+            <button class="icon ion-android-alert" onclick="openTab('tentang')">Tentang</button>
+        </div>
+        <div class="tab-content" id="tentang">
+            <h2 class="text-strong padding text-pink">Tentang Aplikasi</h2>
+            <div class="padding border-green shadow radius mark">
+                <p id="tentangapp">
+                </p>
+            </div>
+        </div>
+        <div class="tab-content active" id="home">
+
+            <div class="row padding align-center">
+                <img class="avatar radius border-white shadow" src="img/logo.jpg" height="300" width="300">
+
+            </div>
+            <div class="space"></div>
+
+            <div class="list">
+                <div class="item  icon ion-person">
+                    <input type="text" id="username" placeholder="Masukkan Username">
+                </div>
+                <div class="item  icon ion-key">
+                    <input type="password" id="password" placeholder="Masukkan Password">
+                    <div class="right">
+                        <button id="showpassword" onclick="showpassword()">Show</button>
+      
+                    </div>
+                </div>
+                <div class="item">
+                    <button class="orange radius full icon ion-android-lock" onclick="login()">Login user</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="mobileui/mobileui.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/variable_publik.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/data_aduan.js"></script>
+    <script type="text/javascript" src="js/ref.js"></script>
+    <script type="text/javascript">
+        function showpassword() {
+
+            if ('password' == $('#password').attr('type')) {
+                $('#password').prop('type', 'text');
+                $('#showpassword').text('Hidden');
+            } else {
+                $('#password').prop('type', 'password');
+                $('#showpassword').text('Show');
+            }
+
+        }
+    </script>
+</body>
+</html>

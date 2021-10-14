@@ -1,0 +1,25 @@
+﻿<div class="page">
+    <div class="header green">
+        <div class="left">
+            <button class="icon ion-ios-arrow-back" onclick="backPage()"></button>
+        </div>
+        <h2>Call Center</h2>
+        <p>Daftar BPK</p>
+    </div>
+    <div class="content has-header padding">
+   <div class="space"></div>
+        <div class="list white">
+            <div class="item" data="getdetailpelayanan">
+                <h2>${nama}</h2>
+                <p class="text-grey">Telp : ${call_center}</p>
+                <div class="right">
+                    <div class="icon-circle border-red-100">
+     <small class="text-grey">
+                            <i class="icon ion-ios-telephone text-red circle" onclick="call_center(${call_center})"></i>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

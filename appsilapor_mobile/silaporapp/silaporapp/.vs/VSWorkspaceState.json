@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\platforms",
+    "\\platforms\\android",
+    "\\platforms\\android\\app",
+    "\\platforms\\android\\app\\src",
+    "\\platforms\\android\\app\\src\\main",
+    "\\plugins",
+    "\\www",
+    "\\www\\js",
+    "\\www\\scripts"
+  ],
+  "SelectedNode": "\\www\\scripts\\variable_publik.js",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title></title>
+
+    <style type="text/css">
+        #map_canvas { /* Must bigger size than 100x100 pixels */
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="header purple">
+        <button class="left icon ion-android-arrow-back" onclick="window.location.href='home.html'"></button>
+        <h1>Form Lokasi</h1>
+    </div>
+
+    <div class="content padding has-header">
+        <div id="map_canvas">
+
+    </div>
+    <div class="row align-center">
+        <div class="col padding light-blue" id="selesai">
+            <p>KIRIM...</p>
+        </div>
+       
+    </div>
+    </div>
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="mobileui/mobileui.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/variable_publik.js"></script>
+
+    <script type="text/javascript">
+
+        var iddarurat = localStorage.getItem('iddarurat');
+        document.addEventListener("deviceready", function () {
+            var markers1 = [];
+            var data = [];
+            var bounds = [];
+            document.addEventListener("backbutton", tombolKembali, false);
+
+
+            var id_group_user = localStorage.getItem('id_group_user');
+
+
+
+            var xlat =localStorage.getItem('Latitude'); //koordinat yang punya hp
+            var xlng =localStorage.getItem('Longitude');//koordinat yang punya hp
+
+                    var div = document.getElementById("map_canvas");
+
+                    // Create a Google Maps native view under the map_canvas div.
+                    var map = plugin.google.maps.Map.getMap(div, {
+                       // 'mapType': plugin.google.maps.MapTypeId.SATELLITE,
+                        'controls': {
+                            'compass': true,
+                            'indoorPicker': true,
+                            'myLocationButton': false,
+                            'myLocation': false,   // (blue dot)
+                            'zoom': true,          // android only
+                            'mapToolbar': true     // android only
+                        },
+                        'gestures': {
+                            'scroll': true,
+                            'tilt': true,
+                            'rotate': true,
+                            'zoom': true
+                        },
+                      
+                    });
+
+                  
+
+                    // Move to the position with animation
+                    map.animateCamera({
+                        target: { lat: xlat, lng: xlng },
+                        zoom: 17,
+                        tilt: 60,
+                        bearing: 140,
+                        duration: 5000
+                    });
+                    data = [{
+                        position: {
+                            lat: xlat,
+                            lng: xlng,
+                        },
+                        title: 'Lat : ' + xlat + ', Lng : ' + xlng
+                    }]
+                    data.map(function (options) {
+                        bounds.push(options.position);
+                        return map.addMarker(options, function (marker) {
+                    
+                            marker.showInfoWindow();
+                        });
+                    });
+
+                  
+                    map.on(plugin.google.maps.event.MAP_CLICK, function (latLng) {
+               //         alert(latLng + " is clicked!");
+                        // Move to the position with animation
+                       
+                        var map = this;
+
+                        map.animateCamera({
+                            target: latLng,
+                            zoom: 17,
+                            tilt: 60,
+                            bearing: 140,
+                            duration: 5000
+                        });
+                        data = [{
+                            position: {
+                                lat: latLng.lat,
+                                lng: latLng.lng,
+                            },
+                            title: 'Lat : ' + latLng.lat + ', Lng : ' + latLng.lng
+                        }]
+
+                        data.map(function (options) {
+                            bounds.push(options.position);
+                            return map.addMarker(options, function (marker) {
+                               
+                                marker.showInfoWindow();
+                            });
+                        });
+
+                    });
+                    // Show the info window
+        
+
+        }, false);
+        $('#selesai').click(function () {
+            var id_group_user = localStorage.getItem('id_group_user');
+            $.post(baseUrl + 'data-aduan/aktifitas', {
+                id_group_user: id_group_user,
+                status: 1
+            })
+                .always(function (data) {
+                    if (data.code == '200') {
+                        alert(data.message)
+                    } else {
+                        alert('terjadi kesalahan')
+
+                    }
+                })
+        })
+
+        function tombolKembali() {
+            window.location.href = 'home.html';
+        }
+    </script>
+
+</body>
+</html>

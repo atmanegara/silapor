@@ -1,0 +1,52 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.red_folder.phonegap.plugin.backgroundservice.sample": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-cleartext": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-googlemaps": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-phone-call": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    }
+  },
+  "dependent_plugins": {
+    "com.red_folder.phonegap.plugin.backgroundservice": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.hallotapinbastariadmin"
+    }
+  }
+}

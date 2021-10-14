@@ -1,0 +1,49 @@
+﻿<div class="page">
+
+    <div class="header blue">
+        <h1 class="align-center">Form Aduan </h1>
+    </div>
+
+    <div class="content has-header">
+        <div class="list">
+            <div class="item">
+                <label class="text-orange">Jenis Aduan</label>
+
+                <select id="id_ref_jenis_aduan" multiple="multiple" >
+                    <option>Pilih Jenis Aduan</option>
+                    <option data="refjenisaduan" value='${id}'>${jenis_aduan}</option>
+                </select>
+            </div>
+            <div class="item full">
+                <img id="showimage" src="img/nopic.jpg" width="300" height="300" >
+            </div>
+
+            <div class="item">
+
+                <button class="green border-green-200 radius icon-text icon-right" onclick="ambilgambar()">
+                    <i class="icon ion-ios-camera-outline"></i>
+                    Ambil Foto
+                </button>
+                <div class="item">
+                    <div class="left">
+                        <input type="checkbox" class="blue" id="sifataduan" checked>
+                    </div>
+                    <p class="text-blue">
+             Darurat / Segera
+                    </p>
+                </div>
+                <div class="item">
+                    <label class="text-orange">Rincian Aduan</label>
+                    <textarea rows="4" cols="5" placeholder="Rincian..." id="rincian_aduan"></textarea>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="footer">
+                 <button class="green  full" onclick="kirimaduan()">Kirim Aduan</button>
+       </div>
+
+    </div>
+    </div>

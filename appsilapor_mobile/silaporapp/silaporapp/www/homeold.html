@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title></title>
+
+</head>
+<body>
+    <!-- menu kiri-->
+    <div class="menu white" id="myMenu">
+        <div class="list no-border">
+            <div class="item green">
+                <div class="left">
+                    <img class="avatar circle" src="img/no_foto.png" width="50" height="50">
+                </div>
+                <h1><p id="usernamemenu"></p></h1>
+                <p id="emailmenu"></p>
+            </div>
+            <a onclick="openPage('profildiri',getprofildiri)" class="item">
+                <div class="left">
+                    <i class="icon ion-person"></i>
+                </div>
+                <h1>Profil</h1>
+            </a>
+            <a onclick="openPage('tentang',gettentangapp)" class="item">
+                <div class="left">
+                    <i class="icon ion-android-alert"></i>
+                </div>
+                <h1>Tentang Halo Tapin</h1>
+            </a>
+            <a onclick="closeApp()" class="item">
+                <div class="left">
+                    <i class="icon ion-ios-close-outline"></i>
+                </div>
+                <h1>Close menu</h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="header green">
+        <button class="left icon ion-navicon" name="button" onclick="openMenu('myMenu')"></button>
+        <h1>Homeold</h1>
+    </div>
+
+    <div class="content padding has-header has-footer">
+        <div class="footer green shadow tab">
+            <button class="icon ion-android-list active" onclick="openTab('tabEvents')">Home</button>
+            <button class="icon ion-android-people" onclick="openTab('myTabGroups')">Pelayanan Masyarakat</button>
+            <button class="icon ion-android-chat" onclick="openTab('tabMessages')">Aduan</button>
+        </div>
+        <div class="tab-content active" id="tabEvents">
+                <div class="padding align-center">
+                    <img src="images/panic_button.png" class="avatar circle border-white shadow" onclick="alertdarurat(4)" />
+
+                </div>
+
+                <div class="row align-center">
+                    <div class="col padding light-blue" onclick="openPage('page_call_center')">
+                        <img class="avatar circle" src="img/call_service.png" width="70" height="70">
+            <p onclick="openPage('page_call_center')">Call Center Polres</p>
+        </div>
+
+        <div class="col padding pink-400" onclick="openPage('page_telpon_darurat')">
+            <img class="avatar circle" src="img/telp_darurat.png" width="70" height="70">
+            <p onclick="openPage('page_telpon_darurat')">Panggilan Darurat</p>
+        </div>
+    </div>
+
+    </p>
+    </div>
+
+    <div class="tab-content" id="myTabGroups">
+        <h1 class="text-bold">Daftar Pelayanan Masyarakat</h1>
+        <div class="list radius white">
+            <div class="item" data="getpelayanan">
+                <div class="left">
+                    <div class="icon-circle text-red border-red">
+                        <img class="avatar circle" src="${path_img}">
+                    </div>
+                </div>
+                <h2>${inisial}</h2>
+                <p class="text-grey-500">${nama}</p>
+                <div class="right" onclick="menujulink('${link}')">
+                    <i class="icon ion-ios-arrow-right"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="tab-content" id="tabMessages">
+        <h2 class="text-strong padding text-pink">Daftar Aduan</h2>
+        <p>
+
+            <div class="list">
+                <div class="item">
+                    <div class="left">
+                        <div class="icon-circle green" onclick="openPage('page_buat_aduan',jenisaduan)">
+                            <i class="icon ion-android-add"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-strong">Buat Aduan</h2>
+        <p class="text-grey-700 ellipsis">Laporkan jika ada kejadian di lingkungan anda</p>
+    </div>
+    <div class="item grey-200">
+        <p class="text-green text-small">Laporan terakhir anda</p>
+    </div>
+  
+
+    <div class="item" data="listaduanby">
+        <div class="left">
+            <img class="avatar circle border-green" src="${path_img}" width="30" height="30">
+        </div>
+        <h2 class="text-strong">Tanggal Aduan : ${jam_tgl}</h2>
+        <p class="text-grey-700 ellipsis">${rincian_aduan} </p>
+    </div>
+    </div>
+    </p>
+    </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="mobileui/mobileui.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/indexhome.js"></script>
+    <script type="text/javascript" src="scripts/variable_publik.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/telpon_darurat.js"></script>
+    <script type="text/javascript" src="js/data_user.js"></script>
+    <script type="text/javascript" src="js/aksi_beep.js"></script>
+    <script type="text/javascript" src="js/call_center.js"></script>
+    <script type="text/javascript" src="js/pelayanan_masyarakat.js"></script>
+    <script type="text/javascript" src="js/data_bpk.js"></script>
+    <script type="text/javascript" src="js/buat_aduan.js"></script>
+    <script>
+        var usernamemenu = localStorage.getItem('username');
+        var emailmenu = localStorage.getItem('email');
+        $("#usernamemenu").html(usernamemenu);
+        $("#emailmenu").html(emailmenu);
+
+
+        function onConfirm(buttonIndex) {
+            if (buttonIndex == 1) { // nomer 1 adalah urutan tombol Ya
+                localStorage.clear();
+                navigator.app.exitApp(); // perintah untuk keluar dari aplikasi
+            }
+        }
+
+        function closeApp() {
+            navigator.notification.confirm(
+                'Yakin untuk Keluar Aplikasi ?', // pesan
+                onConfirm, // callback saat tombol ditekan
+                'Konfirmasi', // title
+                ['Ya', 'Tidak']     // buttonLabels
+            );
+        }
+        function gettentangapp() {
+            $.get(baseUrl + 'ref/tentang-app')
+                .always(function (datanya) {
+                    $("#tentangapp").html(datanya);
+                })
+        }
+       
+    </script>
+</body>
+</html>

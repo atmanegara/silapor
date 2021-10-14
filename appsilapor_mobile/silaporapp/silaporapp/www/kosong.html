@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title></title>
+
+    <style type="text/css">
+        #map_canvas { /* Must bigger size than 100x100 pixels */
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="header purple">
+        <button class="left icon ion-android-arrow-back" onclick="window.location.href='home.html'"></button>
+        <h1>Form Lokasi</h1>
+    </div>
+
+    <div class="content padding has-header">
+        <div id="map_canvas">
+
+        </div>
+        <div class="row align-center">
+            <input type="hidden" id="lat" value="" />
+            <input type="hidden" id="lng" value="" />
+            <input type="hidden" id="latkejadian" value="" />
+            <input type="hidden" id="lngkejadian" value="" />
+            <textarea rows="3" cols="3" placeholder="Rincian Kejadian - alamat kejadian-" id="rincian"></textarea>
+            <div class="col padding light-blue" id="selesai">
+                <p>KIRIM...</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/variable_publik.js"></script>
+    <script type="text/javascript" src="mobileui/mobileui.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script>
+
+
+        $('#selesai').click(function () {
+            var id_group_user = localStorage.getItem('iddarurat');
+            var nope_pengguna = localStorage.getItem('username');
+            var lokasi_pengguna_lat = $("#lat").val();
+            var lokasi_pengguna_lng = $("#lng").val();
+            var lokasi_kejadian_lat = $("#latkejadian").val();
+            var lokasi_kejadian_long = $("#lngkejadian").val();
+            var rincian_aduan = $("#rincian").val();
+            var id_group_user = id_group_user;
+
+            $.post(baseUrl + 'pelayanan-masyarakat/kirim-aduan-darurat', {
+                 id_group_user: id_group_user,
+                nope_pengguna: nope_pengguna,
+                lokasi_pengguna_lat: lokasi_pengguna_lat,
+                lokasi_pengguna_lng: lokasi_pengguna_lng,
+                lokasi_kejadian_lat: lokasi_kejadian_lat,
+                lokasi_kejadian_long: lokasi_kejadian_long,
+                rincian_aduan: rincian_aduan
+            })
+                .always(function (data) {
+                    if (data.code == '200') {
+                        openToast({
+                            message: data.message,
+                            position: 'top'
+                        })
+                    } else {
+                        openToast({
+                            message: data.message,
+                            position: 'top'
+                        })
+
+                    }
+                })
+        })
+
+    </script>
+    <script type="text/javascript">
+
+        var iddarurat = localStorage.getItem('iddarurat');
+        document.addEventListener("deviceready", function () {
+            var markers1 = [];
+            var data = [];
+            var bounds = [];
+            document.addEventListener("backbutton", tombolKembali, false);
+
+
+            var id_group_user = localStorage.getItem('id_group_user');
+
+
+
+            var xlat = localStorage.getItem('Latitude'); //koordinat yang punya hp
+            var xlng = localStorage.getItem('Longitude');//koordinat yang punya hp
+            $("#lat").val(xlat);
+            $("#lng").val(xlng);
+            $("#latkejadian").val(xlat);
+            $("#lngkejadian").val(xlng);
+            var div = document.getElementById("map_canvas");
+
+            // Create a Google Maps native view under the map_canvas div.
+            var map = plugin.google.maps.Map.getMap(div, {
+                // 'mapType': plugin.google.maps.MapTypeId.SATELLITE,
+                'controls': {
+                    'compass': true,
+                    'indoorPicker': true,
+                    'myLocationButton': false,
+                    'myLocation': false,   // (blue dot)
+                    'zoom': true,          // android only
+                    'mapToolbar': true     // android only
+                },
+                'gestures': {
+                    'scroll': true,
+                    'tilt': true,
+                    'rotate': true,
+                    'zoom': true
+                },
+
+            });
+
+
+            // Move to the position with animation
+            map.animateCamera({
+                target: { lat: xlat, lng: xlng },
+                zoom: 17,
+                tilt: 60,
+                bearing: 140,
+                duration: 5000
+            });
+
+            // Add a maker
+            var marker = map.addMarker({
+                position: { lat: xlat, lng: xlng },
+                title: 'Lat : ' + xlat + ', Lng : ' + xlng,
+                snippet: "tekan dann geser (drag / drop)",
+                animation: plugin.google.maps.Animation.DROP
+            });
+            marker.setDraggable(true);
+            marker.showInfoWindow();
+            marker.addEventListener(plugin.google.maps.event.MARKER_DRAG_END, function (point) {
+                marker.setTitle('Lat : ' + point.lat + ', Lng : ' + point.lng);
+                $("#latkejadian").val(point.lat);
+                $("#lngkejadian").val(point.lng);
+                marker.showInfoWindow();
+            });
+            // Show the info window
+            marker.showInfoWindow();
+
+
+
+        }, false);
+
+
+
+        function tombolKembali() {
+            window.location.href = 'home.html';
+        }
+    </script>
+
+</body>
+</html>

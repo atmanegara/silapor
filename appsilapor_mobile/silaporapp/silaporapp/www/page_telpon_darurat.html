@@ -1,0 +1,34 @@
+﻿<div class="page">
+    <div class="header green">
+        <div class="left">
+            <button class="icon ion-ios-arrow-back" onclick="backPage()"></button>
+        </div>
+        <h1 class="title align-center">Telpon Darurat</h1>
+    </div>
+    <div class="content has-header">
+        <div class="list">
+            <div class="item" data="panggilandarurat">
+                <div class="left">
+                          <img class="avatar circle" src="${path_img}" onclick="openpagemap(${id})">
+                  </div>
+                <h2>${inisial}</h2>
+                <p>
+                    ${nama}
+                </p>
+                <div class="right">
+                    <i class="icon ion-ios-arrow-right" onclick="openPage('page_list_bpk', {id : '${id}'  },getListBpk)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer green" onclick="openPage('page_buat_aduan',jenisaduan)">
+            <div class="right">
+                <button class="icon ion-android-chat" ></button>
+            </div>
+            <div class="title">
+              Buat Aduan
+            </div>
+        </div>
+       
+
+    </div>
+</div>

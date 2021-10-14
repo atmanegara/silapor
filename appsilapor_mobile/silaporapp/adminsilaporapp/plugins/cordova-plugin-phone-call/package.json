@@ -1,0 +1,65 @@
+{
+  "_from": "cordova-plugin-phone-call",
+  "_id": "cordova-plugin-phone-call@1.0.7",
+  "_inBundle": false,
+  "_integrity": "sha512-pXS51212NaA++xLF7RLDU+tb05f1iXAwiK67bMqzj257bntChh3t6KIII86sPMU0e4F8n8NI5ddQDNQaGU9Rtg==",
+  "_location": "/cordova-plugin-phone-call",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-phone-call",
+    "name": "cordova-plugin-phone-call",
+    "escapedName": "cordova-plugin-phone-call",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-phone-call/-/cordova-plugin-phone-call-1.0.7.tgz",
+  "_shasum": "c34e82fe5eeb7364a562dce5411078f784b139d7",
+  "_spec": "cordova-plugin-phone-call",
+  "_where": "D:\\job\\job\\appsilapor\\silaporapp\\adminsilaporapp",
+  "author": {
+    "name": "Lakshman.S"
+  },
+  "bugs": {
+    "url": "https://github.com/lakshmansha/cordova-plugin-phone-call/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-phone-call",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "cordovaDependencies": {
+    "3.0.0": {
+      "cordova": ">100"
+    }
+  },
+  "deprecated": false,
+  "description": "Cordova Phone Call Plugin",
+  "homepage": "https://github.com/lakshmansha/cordova-plugin-phone-call#readme",
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "phonecall"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-phone-call",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakshmansha/cordova-plugin-phone-call.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.7"
+}

@@ -1,0 +1,64 @@
+﻿<div class="page">
+
+    <div class="header blue">
+        <button class="left icon ion-android-arrow-back" onclick="backPage()"></button>
+        <h1>Form Perlengkapan</h1>
+    </div>
+
+    <div class="content padding has-header">
+        <p>
+            <div class="list">
+                <div class="item small-space green-50 text-grey-700">
+        <p>
+            DATA PERLENGKAPAN
+        </p>
+    </div>
+    <div class="item">
+        <label class="text-orange">No Seri</label>
+        <input type="text" placeholder="No Seri / No Batch / No IMEI / No barcode" id="no_seri">
+    </div>
+    <div class="item">
+        <label class="text-orange">Nama Alat</label>
+        <input type="text" placeholder="Nama Alat" id="nm_alat">
+    </div>
+    <div class="item">
+        <label class="text-orange">Kapasitas / Jumlah (QTY)</label>
+        <textarea rows="4" cols="4" placeholder="Contoh : 10 Buah, 1000 Liter / buah  (Max 160 karakter)" id="kapasitas"></textarea>
+    </div>
+
+
+    <div class="item">
+        <label class="text-orange">Tanggal Beli</label>
+        <input type="date" id="tgl_beli" placeholder="Tanggal Awal Beli Barang">
+    </div>
+    <div class="item">
+        <label class="text-orange">Masa Kadaluarsa / Masa Habis Pakai</label>
+        <div class="row">
+            <div class="col">
+                <input type="number" id="masa_kadaluarsa" placeholder="Masa Habis Pakai">
+            </div>
+            <div class="col">
+                <select id="satuan_masa">
+                    <option>Pilih Lama Satuan...</option>
+                    <option value='Menit'>Menit</option>
+                    <option value='Jam'>Jam</option>
+                    <option value='Hari'>Hari</option>
+                    <option value='Minggu'>Minggu</option>
+                    <option value='Bulan'>Bulan</option>
+                    <option value='Tahun'>Tahun</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <label class="text-orange">Catatan Lainnya</label>
+        <textarea rows="4" cols="4" placeholder="Catatan Lainnya" id="ket"></textarea>
+    </div>
+
+    <div class="item">
+        <button class="green radius full" onclick="simpanperlengkapan()">Simpan</button>
+    </div>
+</div>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Apache Cordova</title>
+
+    <style type="text/css">
+        #map_canvas { /* Must bigger size than 100x100 pixels */
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+   
+
+        <div class="header blue">
+            <button class="left icon ion-android-arrow-back" onclick="window.location.href='home.html'"></button>
+            <h1>Form Lokasi</h1>
+        </div>
+
+        <div class="content padding has-header">
+            <div id="create_map_canvas">
+
+                <div id="map_canvas">
+                </div>
+            </div>
+            <div class="space"></div>
+
+            <div class="list">
+                <div class="item" data="listlokasikejadian" onclick="lokasilainnya(${lokasi_kejadian_lat},${lokasi_kejadian_long},'${rincian_aduan}','${icon_map}',${id})">
+                    <h2>Si Pelapor :${nope_pelapor} ,Kejadian : ${rincian_aduan}</h2>
+                    <p class="text-grey-500">${lokasi_kejadian_lat} , ${lokasi_kejadian_long}</p>
+                    <div class="right" onclick="openPage('detailorang', { pelapor: '${nope_pelapor}', lokasi_pelapor_lat : '${lokasi_pengguna_lat}',lokasi_pelapor_lng :'${lokasi_pengguna_lng}'},lokasiorang)">
+                        <i class="icon ion-ios-arrow-right"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="space"></div>
+            <input type="hidden" id="idnya" />
+            <div class="row align-center">
+                <div class="col padding light-blue" id="selesai">
+                    <p>SELESAI</p>
+                </div>
+
+            </div>
+        </div>
+ 
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="mobileui/mobileui.js"></script>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/variable_publik.js"></script>
+
+    <script type="text/javascript">
+       
+        getlokasikejadian();
+        document.addEventListener("deviceready", function () {
+        
+	   document.addEventListener("backbutton", tombolKembali, true);
+     
+            var id_group_user = localStorage.getItem('id_group_user');
+        //    var data = [];
+            $.post(baseUrl + 'data-aduan/data-darurat', {
+                id_group_user: id_group_user
+            })
+                .always(function (datalokasi) {
+                   $.each(datalokasi, function (key, value) {
+                        xlat = value.lokasi_kejadian_lat;
+                        xlng = value.lokasi_kejadian_long;
+                        rincian_aduan = value.rincian_aduan;
+                        ikon = value.icon_map;
+                        idnya = value.id;    
+                    })
+                  
+                   $("#idnya").val(idnya);
+                 
+                    var div = document.getElementById("map_canvas");
+
+                    // Create a Google Maps native view under the map_canvas div.
+                    var map = plugin.google.maps.Map.getMap(div, {
+                        'controls': {
+                            'compass': true,
+                            'indoorPicker': true,
+                            'myLocationButton': false,
+                            'myLocation': false,   // (blue dot)
+                            'zoom': true,          // android only
+                            'mapToolbar': true     // android only
+                        },
+                        'gestures': {
+                            'scroll': true,
+                            'tilt': true,
+                            'rotate': true,
+                            'zoom': true
+                        },
+                    });
+
+
+
+               map.animateCamera({
+                   target: { lat: xlat, lng: xlng },
+                        zoom: 17,
+                        tilt: 60,
+                        bearing: 140,
+                        duration: 5000
+                    });
+                   
+
+               // Add a maker
+              var  marker = map.addMarker({
+                   position: { lat: xlat, lng: xlng },
+                   title: rincian_aduan,
+                   snippet: "Lokasi : " + xlat + ',' + xlng,
+                   icon: {
+                       url: ikon,
+                       size: {
+                           width: 30,
+                           height: 30
+                       }
+                   },
+                   animation: plugin.google.maps.Animation.BOUNCE
+               });
+
+               // Show the info window
+               marker.showInfoWindow();
+                })
+
+        }, false);
+
+        $('#selesai').click(function () {
+            var id = $("#idnya").val();
+            $.post(baseUrl + 'data-aduan/aktifitas', {
+                id: id,
+                status : 1
+            })
+                .always(function (data) {
+                    if (data.code == '200') {
+                        alert(data.message)
+                    } else {
+                        alert('terjadi kesalahan')
+
+                    }
+                })
+        })
+		
+		 function tombolKembali() {
+            window.location.href = 'home.html';
+        }
+
+        function getlokasikejadian() {
+
+            var id_group_user = localStorage.getItem('id_group_user');
+            $.post(baseUrl + 'data-aduan/data-darurat', {
+                id_group_user: id_group_user
+            })
+                .done(function () {
+                    console.log('done');
+                })
+                .always(function (data) {
+                    // var data = data.message;
+                    console.log(data);
+                    listlokasikejadian.length = 0 // clear array contacts
+                    localStorage.setItem('jumlahmap',data.length);
+                    for (var index = 0; index < data.length; index++) {
+                        listlokasikejadian.push(data[index])
+                    }
+
+
+                })
+         }
+
+        function lokasilainnya(latx, lngx, rincianx, ikon,idnya) {
+
+            $("#idnya").val(idnya);
+        //    document.getElementById("map_canvas").remove();
+          //  event.preventDefault();
+        //    $('#create_map_canvas').append('<div id="map_canvas"></div>');
+
+           // var marker = null;
+            // Move to the position with animation
+            var div = document.getElementById("map_canvas");
+            // Create a Google Maps native view under the map_canvas div.
+                 var  map = plugin.google.maps.Map.getMap(div, {
+                'controls': {
+                    'compass': true,
+                    'indoorPicker': true,
+                    'myLocationButton': false,
+                    'myLocation': false,   // (blue dot)
+                    'zoom': true,          // android only
+                    'mapToolbar': true     // android only
+                },
+                'gestures': {
+                    'scroll': true,
+                    'tilt': true,
+                    'rotate': true,
+                    'zoom': true
+                },
+            });
+
+            map.animateCamera({
+                target: { lat: latx, lng: lngx},
+                zoom: 17,
+                tilt: 60,
+                bearing: 140,
+                duration: 5000
+            });
+
+            // Add a maker
+        var  marker = map.addMarker({
+                position: { lat: latx, lng: lngx },
+                title: rincianx,
+                snippet: "Lokasi : " + latx + ',' + lngx,
+                icon: {
+                    url: ikon,
+                    size: {
+                        width: 30,
+                        height: 30
+                    }
+                },
+                animation: plugin.google.maps.Animation.BOUNCE
+            });
+
+            // Show the info window
+            marker.showInfoWindow();
+        }
+
+        function lokasiorang(params) {
+
+            document.getElementById('orangnya').value = "Si Pelapor : " + params.pelapor + ", Lokasi Pelapor : " + params.lokasi_pelapor_lat + "," + params.lokasi_pelapor_lng +", "+
+                "https://www.google.com/maps/@" + params.lokasi_pelapor_lat + "," + params.lokasi_pelapor_lng
+
+}
+    </script>
+
+</body>
+</html>

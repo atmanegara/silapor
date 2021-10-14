@@ -1,0 +1,40 @@
+﻿
+<body class="blue">
+    <div class="page">
+        <div class="header indigo">
+            <div class="left">
+                <button class="icon ion-android-arrow-back" onclick="backPage()"></button>
+                <h1 id="namasubunit2"></h1>
+            </div>
+        </div>
+        <div class="content has-header">
+
+            <div class="list padding white">
+                <div class="item">
+                    <div class="left">
+                        <div class="icon-circle green" onclick="bukaformtransportasi()">
+                            <i class="icon ion-android-add"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-strong">Tambah Transportasi</h2>
+                    <p class="text-grey-700 ellipsis">Wajib mengisi daftar perlengkapan, <br />
+                    untuk keperluan pendataan inventaris </p>
+                </div>
+
+                <div class="item white mark border-green margin-button shadow" data="datatransportasi">
+                    <h2><strong>${no_seri} - ${jns_kendaraan}</strong></h2>
+                    <p class="text-purple">Jumlah (Qty)    : <u>${qty}</u></p>
+                    <p class="text-purple">Tanggal Beli                 : <u>${tgl_beli}</u></p>
+                    <p class="text-purple">Keterangan              : <u>${ket}</u></p>
+                    <div class="right">
+                        <i class="icon ion-trash-a red" onclick="deleteItemTransportasi(${id}, ${no_seri})"></i>
+                        <i class="icon ion-ios-compose orange" onclick="openPage('form_transportasi_update', { id : '${id}', no_seri: '${no_seri}' , jns_kendaraan : '${jns_kendaraan}', qty : '${qty}', tgl_beli : '${tgl_beli}',ket : '${ket}' }, 'tampilkanTransportasi');"></i>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        </div>
+</body>

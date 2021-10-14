@@ -1,0 +1,61 @@
+﻿<div class="page">
+    <div class=""header blue">
+        <div class="left">
+            <button class="icon ion-android-arrow-back" onclick="backPage()"></button>
+        </div>
+   
+    </div>
+    <div class="content has-header">
+        <div class="cover green align-center blend-soft-light" style="background-image:url(img/backtop.png)">
+            <img class="avatar circle border-white shadow" src="img/no_foto.png"  width="100" height="100">
+        </div>
+        <div class="list">
+            <div class="item">
+                <input type="hidden" id="id">
+                <label class="text-orange">No. Induk</label>
+                <input type="text" id="no_induk">
+            </div>
+            <div class="item">
+                <label class="text-orange">Nama Lengkap</label>
+                <input type="text" id="nama">
+            </div>
+            <div class="item">
+                <label class="text-orange">Alamat</label>
+                <textarea rows="4" cols="30" id="alamat"></textarea>
+            </div>
+
+            <div class="item">
+                <label class="text-orange">Jenis Kelamin</label>
+                <select id="jkel">
+                    <option>Pilih Jenis Kelamin</option>
+                    <option value="1">Laki - Laki</option>
+                    <option value="2">Perempuan</option>
+                </select>
+            </div>
+            <div class="item">
+                <label class="text-orange">No. HP</label>
+                <input type="text" id="nope">
+            </div>
+            <div class="item">
+                <button class="green radius full" onclick="updateprofil()">Ganti Profil</button>
+            </div>
+            <div class="space"></div>
+
+            <div class="list no-border">
+                <div class="item">
+
+                    <label class="text-blue">Username</label>
+                    <input type="text" id="username">
+                </div>
+                <div class="item">
+                    <label class="text-blue">Password Baru</label>
+                    <input type="text" id="password_new">
+                </div>
+                <div class="item">
+                    <button class="blue radius full" onclick="updateakun()">Ganti Password</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
